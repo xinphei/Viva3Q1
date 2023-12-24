@@ -1,3 +1,0 @@
-Phantom
-BlackMage
-PhantomTest

@@ -8,7 +8,7 @@
 
 public class Phantom {
     
-    //declare instant variables
+    //declare instance variables
     private double accuracy;
     private double critRate;
     
