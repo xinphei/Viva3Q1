@@ -64,7 +64,7 @@ public class Phantom {
     
     // Damage calculation method
     public int damage(BlackMage blackMage) {
-        double effectiveAccuracy = accuracy * (1 - blackMage.getEvasion());
+        double effectiveAccuracy = accuracy * (1- (blackMage.getEvasion()));
         double effectiveCritRate = critRate - blackMage.getCritResistance();
         //[0.0, 1.0)
         double randomValue = Math.random(); // Random value between 0 and 1
@@ -87,11 +87,6 @@ public class Phantom {
         
     }
 
-    // ToString method
-    public String toString(int damageValue) {
-        return "Combat Log:\n" +
-               "Damage Dealt: " + damageValue;
-    }
 }
 
 class BlackMage {
@@ -122,6 +117,18 @@ class BlackMage {
     public void setHp(int hp) {
         this.hp = hp;
     }
+    
+    
+    // ToString method
+    public String toString(int damageValue) {
+        String output;
+        if (damageValue > 0) {
+            output = "[NORM] Phantom has dealt " + damageValue + " damage to the Black Mage (" + getHp() + "/100)";
+        } else {
+            output = "[MISS] Phantom has dealt 0 damage to the Black Mage (" + getHp() + "/100))";
+        }
+        return output;
+    }
 
 }
 
@@ -141,14 +148,9 @@ class PhantomTest {
         while (blackMage.getHp() > 0) {
             // Inside the loop, Phantom deals damage to the Black Mage
             damageValue = phantom.damage(blackMage);
-
-            if (damageValue > 0) {
-                System.out.println("[NORM] Phantom has dealt " + damageValue + " damage to the Black Mage (" + blackMage.getHp() + "/100)");
-            } else {
-                System.out.println("[MISS] Phantom has dealt 0 damage to the Black Mage (" + blackMage.getHp() + "/100)");
-            }
+            System.out.println(blackMage.toString(damageValue));
+            
         }
-
         // Display the result of the battle
         System.out.println("The Black Mage is defeated...");
     }
